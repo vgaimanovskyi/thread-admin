@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.fe1886f083d57aae2185e88c13ba8e57.js"
+  "/thread-admin/precache-manifest.c201d08240460dd5c30e85e538827e5b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vlad-admin"});
