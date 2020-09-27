@@ -35,7 +35,12 @@
           </v-col>
         </v-row>
         <div class="text-center my-10" v-if="loading">
-          <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
         </div>
         <v-row class="mb-4" v-else>
           <v-col
@@ -45,20 +50,23 @@
           >
             <v-card class="mx-auto" width="330">
               <v-img :src="product.urlPoster" height="330px">
-                <div class="tag tag--discount" v-if="product.discount">-{{product.discount}}%</div>
+                <div class="tag tag--discount" v-if="product.discount">
+                  -{{ product.discount }}%
+                </div>
                 <div class="tag tag--new" v-if="product.new">Новинка</div>
               </v-img>
 
               <v-card-title class="text-no-wrap">
-                <span style="overflow-x: hidden;" :title="product.name">{{product.name}}</span>
+                <span style="overflow-x: hidden" :title="product.name">{{
+                  product.name
+                }}</span>
               </v-card-title>
 
               <v-card-title class="pb-0 pt-0 amber--text">
-                {{product.price - (product.price*product.discount/100)}} $
-                <s
-                  v-if="product.discount"
-                  class="grey--text text-body-1 ml-4"
-                >{{product.price}} $</s>
+                {{ product.price - (product.price * product.discount) / 100 }} $
+                <s v-if="product.discount" class="grey--text text-body-1 ml-4"
+                  >{{ product.price }} $</s
+                >
               </v-card-title>
 
               <v-card-actions>
@@ -68,7 +76,8 @@
                   :loading="loading"
                   :disabled="loading"
                   :to="'product/' + product.id"
-                >Изменить</v-btn>
+                  >Изменить</v-btn
+                >
 
                 <v-btn
                   color="error"
@@ -76,7 +85,8 @@
                   :loading="loading"
                   :disabled="loading"
                   @click="productRemove(product.id)"
-                >Удалить</v-btn>
+                  >Удалить</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
@@ -88,7 +98,8 @@
           :loading="loading"
           :disabled="loading || counter >= products.length"
           @click="moreProducts(9)"
-        >Смотреть еще</v-btn>
+          >Смотреть еще</v-btn
+        >
       </v-col>
     </v-row>
   </v-container>
@@ -96,6 +107,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Product list",
+  },
   data() {
     return {
       counter: 0,

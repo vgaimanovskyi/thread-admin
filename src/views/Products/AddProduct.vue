@@ -10,7 +10,7 @@
             type="text"
             v-model="name"
             required
-            :rules="[v => !!v || 'Поле обязательное']"
+            :rules="[(v) => !!v || 'Поле обязательное']"
             :disabled="loading"
           ></v-text-field>
           <v-text-field
@@ -18,7 +18,7 @@
             name="Материал"
             type="text"
             v-model="material"
-            :rules="[v => !!v || 'Поле обязательное']"
+            :rules="[(v) => !!v || 'Поле обязательное']"
             :disabled="loading"
           ></v-text-field>
           <v-select
@@ -38,7 +38,7 @@
                 name="Размер"
                 type="text"
                 v-model="size"
-                :rules="[v => !!v || 'Поле обязательное']"
+                :rules="[(v) => !!v || 'Поле обязательное']"
                 :disabled="loading"
               ></v-text-field>
             </v-col>
@@ -80,7 +80,12 @@
             :rules="descriptionRules"
             :disabled="loading"
           ></v-textarea>
-          <v-switch v-model="available" class="ma-2" label="В наличии" :disabled="loading"></v-switch>
+          <v-switch
+            v-model="available"
+            class="ma-2"
+            label="В наличии"
+            :disabled="loading"
+          ></v-switch>
         </v-form>
         <v-row>
           <v-col>
@@ -97,7 +102,7 @@
                 <input
                   ref="posterInput"
                   type="file"
-                  style="display: none;"
+                  style="display: none"
                   accept="image/*"
                   @change="posterUpload"
                 />
@@ -109,13 +114,13 @@
           </v-col>
           <v-col>
             <img :src="posterSrc" height="150" v-if="posterSrc" />
-            <div v-else style="color: red;">{{posterError}}</div>
+            <div v-else style="color: red">{{ posterError }}</div>
           </v-col>
         </v-row>
         <v-divider></v-divider>
         <v-row>
           <v-col class="col-12 col-sm-6">
-            <v-row :class="{'border': gallerySrc.length > 0}" :align="'center'">
+            <v-row :class="{ border: gallerySrc.length > 0 }" :align="'center'">
               <v-col class="col-12 col-md-6">
                 <v-btn
                   :disabled="loading"
@@ -128,7 +133,7 @@
                 <input
                   ref="galleryInput"
                   type="file"
-                  style="display: none;"
+                  style="display: none"
                   accept="image/*"
                   multiple
                   @change="galleryUpload"
@@ -141,10 +146,12 @@
                 class="col-12 col-md-6"
                 v-for="(photoSrc, index) in gallerySrc"
                 :key="index"
-                style="text-align: center;"
+                style="text-align: center"
               >
-                <div v-if="photoSrc === 'Неправельный файл'" style="color: red;">{{photoSrc}}</div>
-                <div v-else style="overflow-x: hidden;">
+                <div v-if="photoSrc === 'Неправельный файл'" style="color: red">
+                  {{ photoSrc }}
+                </div>
+                <div v-else style="overflow-x: hidden">
                   <img :src="photoSrc" height="150" />
                 </div>
               </v-col>
@@ -153,14 +160,18 @@
           <v-col class="col-12 col-sm-6">
             <v-row :align="'center'">
               <v-col class="col-12 col-md-6">
-                <v-btn :disabled="loading" class="primary mr-3" @click="triggerUpload('shopInput')">
+                <v-btn
+                  :disabled="loading"
+                  class="primary mr-3"
+                  @click="triggerUpload('shopInput')"
+                >
                   Магазин
                   <v-icon right dark>mdi-cloud-upload</v-icon>
                 </v-btn>
                 <input
                   ref="shopInput"
                   type="file"
-                  style="display: none;"
+                  style="display: none"
                   accept="image/*"
                   multiple
                   @change="shopUpload"
@@ -175,10 +186,12 @@
                 class="col-12 col-md-6"
                 v-for="(photoSrc, index) in shopSrc"
                 :key="index"
-                style="text-align: center;"
+                style="text-align: center"
               >
-                <div v-if="photoSrc === 'Неправельный файл'" style="color: red;">{{photoSrc}}</div>
-                <div v-else style="overflow-x: hidden;">
+                <div v-if="photoSrc === 'Неправельный файл'" style="color: red">
+                  {{ photoSrc }}
+                </div>
+                <div v-else style="overflow-x: hidden">
                   <img :src="photoSrc" height="150" />
                 </div>
               </v-col>
@@ -193,7 +206,8 @@
               :disabled="!valid || !poster || !photosValid || loading"
               :loading="loading"
               @click="createProduct"
-            >Создать</v-btn>
+              >Создать</v-btn
+            >
           </v-col>
         </v-row>
       </v-col>
@@ -205,6 +219,9 @@
 // import { db } from "../../main";
 
 export default {
+  metaInfo: {
+    title: "Add Product",
+  },
   data() {
     return {
       valid: false,

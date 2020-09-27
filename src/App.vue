@@ -4,15 +4,15 @@
       <v-list dense>
         <v-list-item :to="link.url" v-for="link of links" :key="link.title">
           <v-list-item-action>
-            <v-icon>{{link.icon}}</v-icon>
+            <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>{{link.title}}</v-list-item-title>
+            <v-list-item-title>{{ link.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="onLogout" v-if="isUserLoggedIn">
           <v-list-item-action>
-            <v-icon>{{mdiLogoutVariant}}</v-icon>
+            <v-icon>{{ mdiLogoutVariant }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Logout</v-list-item-title>
@@ -22,22 +22,33 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="indigo" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        class="hidden-md-and-up"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>
         <a
           href="https://vgaimanovskyi.github.io/thread-master/"
           class="white--text text-decoration-none"
           target="_black"
-        >Thread-master</a>
+          >Thread-master</a
+        >
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn x-small :to="link.url" v-for="link of links" :key="link.title" text>
-          <v-icon left>{{link.icon}}</v-icon>
-          {{link.title}}
+        <v-btn
+          x-small
+          :to="link.url"
+          v-for="link of links"
+          :key="link.title"
+          text
+        >
+          <v-icon left>{{ link.icon }}</v-icon>
+          {{ link.title }}
         </v-btn>
         <v-btn x-small @click="onLogout" text v-if="isUserLoggedIn">
-          <v-icon left>{{mdiLogoutVariant}}</v-icon>Logout
+          <v-icon left>{{ mdiLogoutVariant }}</v-icon
+          >Logout
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
@@ -55,7 +66,8 @@
           target="_blank"
           class="px-2 text-body-2"
           color="white"
-        >Vadym Haimanovshyi</v-btn>
+          >Vadym Haimanovskyi</v-btn
+        >
         {{ new Date().getFullYear() }}
       </span>
     </v-footer>
@@ -68,9 +80,11 @@
         @input="snackbar = false"
         :value="true"
       >
-        {{error}}
+        {{ error }}
         <template v-slot:action="{ attrs }">
-          <v-btn dark text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+          <v-btn dark text v-bind="attrs" @click="snackbar = false"
+            >Close</v-btn
+          >
         </template>
       </v-snackbar>
     </template>

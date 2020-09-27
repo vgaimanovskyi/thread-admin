@@ -35,7 +35,8 @@
               @click="onSubmit"
               :disabled="!valid || loading"
               :loading="loading"
-            >Login</v-btn>
+              >Login</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>
@@ -45,6 +46,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Thread Login",
+  },
   data() {
     return {
       email: "",

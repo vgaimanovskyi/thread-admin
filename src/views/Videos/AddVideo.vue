@@ -10,7 +10,7 @@
             type="text"
             v-model="name"
             required
-            :rules="[v => !!v || 'Поле обязательное']"
+            :rules="[(v) => !!v || 'Поле обязательное']"
           ></v-text-field>
           <v-text-field
             label="ID видео"
@@ -26,7 +26,7 @@
             <b>pZvRgstCvEw</b>
           </div>
           <iframe
-            style="display: block; margin: 0 auto;"
+            style="display: block; margin: 0 auto"
             v-if="videoID"
             width="560"
             height="315"
@@ -43,7 +43,8 @@
               :disabled="!valid || loading"
               :loading="loading"
               @click="createVideo"
-            >Создать</v-btn>
+              >Создать</v-btn
+            >
           </v-col>
         </v-row>
       </v-col>
@@ -53,6 +54,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Add Video",
+  },
   data() {
     return {
       valid: false,

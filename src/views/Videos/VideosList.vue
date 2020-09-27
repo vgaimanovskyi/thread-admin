@@ -24,17 +24,31 @@
           </v-col>
         </v-row>
         <div class="text-center my-10" v-if="loading">
-          <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
         </div>
         <v-row class="mb-4" v-else>
-          <v-col class="col-12 col-sm-6 col-md-4" v-for="video in sliceVideos()" :key="video.id">
+          <v-col
+            class="col-12 col-sm-6 col-md-4"
+            v-for="video in sliceVideos()"
+            :key="video.id"
+          >
             <v-card class="mx-auto" max-width="330">
-              <v-img :src="'https://img.youtube.com/vi/'+ video.video + '/mqdefault.jpg'"></v-img>
+              <v-img
+                :src="
+                  'https://img.youtube.com/vi/' + video.video + '/mqdefault.jpg'
+                "
+              ></v-img>
 
               <v-card-title
-                style="min-height: 62px;"
+                style="min-height: 62px"
                 class="text-subtitle-2 align-start pb-1"
-              >{{video.name}}</v-card-title>
+                >{{ video.name }}</v-card-title
+              >
 
               <v-card-actions>
                 <v-btn
@@ -43,7 +57,8 @@
                   :loading="loading"
                   :disabled="loading"
                   :to="'video/' + video.id"
-                >Изменить</v-btn>
+                  >Изменить</v-btn
+                >
 
                 <v-btn
                   color="error"
@@ -51,7 +66,8 @@
                   :loading="loading"
                   :disabled="loading"
                   @click="videoRemove(video.id)"
-                >Удалить</v-btn>
+                  >Удалить</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
@@ -63,7 +79,8 @@
           :loading="loading"
           :disabled="loading || counter >= videos.length"
           @click="moreVideos(9)"
-        >Смотреть еще</v-btn>
+          >Смотреть еще</v-btn
+        >
       </v-col>
     </v-row>
   </v-container>
@@ -71,6 +88,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Video list",
+  },
   data() {
     return {
       counter: 0,

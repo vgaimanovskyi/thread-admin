@@ -4,12 +4,17 @@
       <v-col class="col-12 col-sm-8">
         <h1 class="mb-3">Отзывы</h1>
         <div class="text-center my-10" v-if="loading">
-          <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
         </div>
         <v-expansion-panels focusable v-else>
           <v-expansion-panel v-for="review in reviews" :key="review.id">
             <v-expansion-panel-header disable-icon-rotate>
-              {{review.date | date("datetime")}}
+              {{ review.date | date("datetime") }}
               <template v-slot:actions>
                 <v-icon color="teal" v-if="review.done">mdi-check</v-icon>
                 <v-icon color="error" v-else>mdi-alert-circle</v-icon>
@@ -21,15 +26,15 @@
                   <v-row>
                     <v-col class="col-12 col-md-6">
                       <span class="grey--text">Имя:</span>
-                      {{review.yourname}}
+                      {{ review.yourname }}
                     </v-col>
                     <v-col class="col-12 col-md-6">
                       <span class="grey--text">Email:</span>
-                      {{review.email}}
+                      {{ review.email }}
                     </v-col>
                     <v-col class="col-12 col-md-6">
                       <span class="grey--text">Тел:</span>
-                      {{review.tel}}
+                      {{ review.tel }}
                     </v-col>
                     <v-col class="col-12 col-md-6">
                       <v-btn
@@ -37,13 +42,15 @@
                         color="primary"
                         :href="review.fileUrl"
                         :target="'_blank'"
+                        :disabled="!review.fileUrl"
                         download
-                      >Открыть файл</v-btn>
+                        >Открыть файл</v-btn
+                      >
                     </v-col>
                     <v-col class="col-12">
                       <span class="grey--text">Комментарий:</span>
                       <br />
-                      {{review.comment}}
+                      {{ review.comment }}
                     </v-col>
                   </v-row>
                 </v-col>
@@ -57,7 +64,8 @@
                     :disabled="loading"
                     color="primary"
                     @click="sendReviewAnswer(review.email)"
-                  >Ответить</v-btn>
+                    >Ответить</v-btn
+                  >
                 </v-col>
                 <v-col class="col-12 col-sm-4 d-flex justify-center">
                   <v-btn
@@ -66,7 +74,8 @@
                     :disabled="review.done || loading"
                     color="success"
                     @click="reviewDone(review.id)"
-                  >Выполнено</v-btn>
+                    >Выполнено</v-btn
+                  >
                 </v-col>
                 <v-col class="col-12 col-sm-4 d-flex justify-center">
                   <v-btn
@@ -74,8 +83,9 @@
                     :loading="loading"
                     :disabled="loading"
                     color="error"
-                    @click="reviewRemote(review.id)"
-                  >Удалить</v-btn>
+                    @click="reviewRemove(review.id)"
+                    >Удалить</v-btn
+                  >
                 </v-col>
               </v-row>
             </v-expansion-panel-content>
@@ -88,8 +98,8 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  metaInfo: {
+    title: "Admin Reviews",
   },
   computed: {
     reviews() {
@@ -103,8 +113,8 @@ export default {
     async reviewDone(id) {
       await this.$store.dispatch("reviewDone", id);
     },
-    async reviewRemote(id) {
-      await this.$store.dispatch("reviewRemote", id);
+    async reviewRemove(id) {
+      await this.$store.dispatch("reviewRemove", id);
     },
     sendReviewAnswer(address) {
       location.href = `mailto:${address}`;

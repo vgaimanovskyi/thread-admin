@@ -167,7 +167,7 @@ export default new Vuex.Store({
         const posterUrlVal = await db.ref(`products/${payload}`).child("urlPoster").once("value");
         const posterUrl = posterUrlVal.val();
         const poster = fs.refFromURL(posterUrl);
-        poster.delete();
+        await poster.delete();
         console.log("poster deleted from the storage");
         // gallery
         const galleryUrlVal = await db.ref(`products/${payload}`).child("urlGallery").once("value");

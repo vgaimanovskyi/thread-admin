@@ -4,6 +4,7 @@ import store from './store';
 import router from './router';
 import vuetify from './plugins/vuetify';
 import dateFilter from './filters/date';
+import VueMeta from 'vue-meta'
 import './registerServiceWorker';
 
 
@@ -14,6 +15,7 @@ import "firebase/auth";
 
 Vue.config.productionTip = false;
 Vue.filter("date", dateFilter);
+Vue.use(VueMeta)
 
 firebase.initializeApp({
   apiKey: "AIzaSyC8Cd8xpvEKXh8vjvMtpTB0fdcP7wzBRGc",

@@ -1,4 +1,5 @@
 import { db } from "../main";
+import { fs } from "../main";
 
 export default {
     state: {
@@ -15,7 +16,7 @@ export default {
                 }
             });
         },
-        SET_REVIEW_REMOTE(state, payload) {
+        SET_REVIEW_REMOVE(state, payload) {
             const index = state.reviews.findIndex(review => review.id === payload);
             state.reviews.splice(index, 1);
         }
@@ -64,12 +65,22 @@ export default {
                 throw error
             }
         },
-        async reviewRemote({ commit }, payload) {
+        async reviewRemove({ commit }, payload) {
             commit("CLEAR_ERROR");
             commit("SET_LOADING", true);
             try {
+                const fileUrlVal = await db.ref(`reviews/${payload}`).child("fileUrl").once("value");
+                console.log("fileUrlVal", fileUrlVal)
+                const fileUrl = fileUrlVal.val();
+                console.log("fileUrl", fileUrl)
+                if (fileUrl) {
+                    const file = fs.refFromURL(fileUrl);
+                    console.log("file", file)
+                    await file.delete();
+                }
+                console.log("review file deleted from the storage");
                 await db.ref(`reviews/${payload}`).remove();
-                commit("SET_REVIEW_REMOTE", payload);
+                commit("SET_REVIEW_REMOVE", payload);
                 commit("SET_LOADING", false);
             } catch (error) {
                 commit("SET_ERROR", error.message);

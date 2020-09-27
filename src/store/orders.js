@@ -6,7 +6,7 @@ export default {
     },
     mutations: {
         SET_ORDERS(state, payload) {
-            state.orders = payload.sort((a, b) => new Date(b.date) - new Date(a.date));
+            state.orders = payload.sort((a, b) => new Date(b.cartData.date) - new Date(a.cartData.date));
         },
         SET_ORDER_DONE(state, payload) {
             state.orders.find(order => {
@@ -15,7 +15,7 @@ export default {
                 }
             });
         },
-        SET_ORDER_REMOTE(state, payload) {
+        SET_ORDER_REMOVE(state, payload) {
             const index = state.orders.findIndex(order => order.id === payload);
             state.orders.splice(index, 1);
         }
@@ -59,12 +59,12 @@ export default {
                 throw error
             }
         },
-        async orderRemote({ commit }, payload) {
+        async orderRemove({ commit }, payload) {
             commit("CLEAR_ERROR");
             commit("SET_LOADING", true);
             try {
                 await db.ref(`orders/${payload}`).remove();
-                commit("SET_ORDER_REMOTE", payload);
+                commit("SET_ORDER_REMOVE", payload);
                 commit("SET_LOADING", false);
             } catch (error) {
                 commit("SET_ERROR", error.message);

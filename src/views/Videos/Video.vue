@@ -69,6 +69,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Video",
+  },
   data() {
     return {
       id: this.$route.params["id"],

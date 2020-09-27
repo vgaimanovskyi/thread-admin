@@ -4,7 +4,12 @@
       <v-col class="col-12 col-sm-8">
         <h1 class="text--secondary mb-3">Изменить товар</h1>
         <div class="text-center my-10" v-if="loading">
-          <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
         </div>
         <div v-else>
           <v-form ref="form" v-model="valid" validation>
@@ -14,14 +19,14 @@
               type="text"
               v-model="product.name"
               required
-              :rules="[v => !!v || 'Поле обязательное']"
+              :rules="[(v) => !!v || 'Поле обязательное']"
             ></v-text-field>
             <v-text-field
               label="Материал"
               name="Материал"
               type="text"
               v-model="product.material"
-              :rules="[v => !!v || 'Поле обязательное']"
+              :rules="[(v) => !!v || 'Поле обязательное']"
             ></v-text-field>
             <v-select
               v-model="product.catId"
@@ -39,7 +44,7 @@
                   name="Размер"
                   type="text"
                   v-model="product.size"
-                  :rules="[v => !!v || 'Поле обязательное']"
+                  :rules="[(v) => !!v || 'Поле обязательное']"
                 ></v-text-field>
               </v-col>
               <v-col class="col-12 col-sm-6 col-md-3">
@@ -78,20 +83,27 @@
               :counter="300"
               :rules="descriptionRules"
             ></v-textarea>
-            <v-switch v-model="product.available" class="ma-2" label="В наличии"></v-switch>
+            <v-switch
+              v-model="product.available"
+              class="ma-2"
+              label="В наличии"
+            ></v-switch>
           </v-form>
           <v-row>
             <v-col>
               <v-row :align="'center'">
                 <v-col class="col-12 col-md-6">
-                  <v-btn class="warning mr-3" @click="triggerUpload('posterInput')">
+                  <v-btn
+                    class="warning mr-3"
+                    @click="triggerUpload('posterInput')"
+                  >
                     Постер
                     <v-icon right dark>mdi-cloud-upload</v-icon>
                   </v-btn>
                   <input
                     ref="posterInput"
                     type="file"
-                    style="display: none;"
+                    style="display: none"
                     accept="image/*"
                     @change="posterUpload"
                   />
@@ -103,22 +115,28 @@
             </v-col>
             <v-col>
               <img :src="posterSrc" height="150" v-if="posterSrc" />
-              <div v-else style="color: red;">{{posterError}}</div>
+              <div v-else style="color: red">{{ posterError }}</div>
             </v-col>
           </v-row>
           <v-divider></v-divider>
           <v-row>
             <v-col class="col-12 col-sm-6">
-              <v-row :class="{'border': gallerySrc.length > 0}" :align="'center'">
+              <v-row
+                :class="{ border: gallerySrc.length > 0 }"
+                :align="'center'"
+              >
                 <v-col class="col-12 col-md-6">
-                  <v-btn class="primary mr-3" @click="triggerUpload('galleryInput')">
+                  <v-btn
+                    class="primary mr-3"
+                    @click="triggerUpload('galleryInput')"
+                  >
                     Галерея
                     <v-icon right dark>mdi-cloud-upload</v-icon>
                   </v-btn>
                   <input
                     ref="galleryInput"
                     type="file"
-                    style="display: none;"
+                    style="display: none"
                     accept="image/*"
                     multiple
                     @change="galleryUpload"
@@ -131,10 +149,15 @@
                   class="col-12 col-md-6"
                   v-for="(photoSrc, index) in gallerySrc"
                   :key="index"
-                  style="text-align: center;"
+                  style="text-align: center"
                 >
-                  <div v-if="photoSrc === 'Неправельный файл'" style="color: red;">{{photoSrc}}</div>
-                  <div v-else style="overflow-x: hidden;">
+                  <div
+                    v-if="photoSrc === 'Неправельный файл'"
+                    style="color: red"
+                  >
+                    {{ photoSrc }}
+                  </div>
+                  <div v-else style="overflow-x: hidden">
                     <img :src="photoSrc" height="150" />
                   </div>
                 </v-col>
@@ -143,14 +166,17 @@
             <v-col class="col-12 col-sm-6">
               <v-row :align="'center'">
                 <v-col class="col-12 col-md-6">
-                  <v-btn class="primary mr-3" @click="triggerUpload('shopInput')">
+                  <v-btn
+                    class="primary mr-3"
+                    @click="triggerUpload('shopInput')"
+                  >
                     Магазин
                     <v-icon right dark>mdi-cloud-upload</v-icon>
                   </v-btn>
                   <input
                     ref="shopInput"
                     type="file"
-                    style="display: none;"
+                    style="display: none"
                     accept="image/*"
                     multiple
                     @change="shopUpload"
@@ -165,10 +191,15 @@
                   class="col-12 col-md-6"
                   v-for="(photoSrc, index) in shopSrc"
                   :key="index"
-                  style="text-align: center;"
+                  style="text-align: center"
                 >
-                  <div v-if="photoSrc === 'Неправельный файл'" style="color: red;">{{photoSrc}}</div>
-                  <div v-else style="overflow-x: hidden;">
+                  <div
+                    v-if="photoSrc === 'Неправельный файл'"
+                    style="color: red"
+                  >
+                    {{ photoSrc }}
+                  </div>
+                  <div v-else style="overflow-x: hidden">
                     <img :src="photoSrc" height="150" />
                   </div>
                 </v-col>
@@ -183,7 +214,8 @@
                 :disabled="!valid || !posterSrc || !photosValid || loading"
                 :loading="loading"
                 @click="updateProduct"
-              >Обновить</v-btn>
+                >Обновить</v-btn
+              >
             </v-col>
             <v-col class="mt-3 mb-3 d-flex justify-center">
               <v-btn
@@ -191,7 +223,8 @@
                 :disabled="loading"
                 :loading="loading"
                 @click="clearChanges"
-              >Сбросить</v-btn>
+                >Сбросить</v-btn
+              >
             </v-col>
             <v-col class="mt-3 mb-3 d-flex justify-center">
               <v-btn
@@ -199,7 +232,8 @@
                 :disabled="loading"
                 :loading="loading"
                 @click="productRemove(product.id)"
-              >Удалить</v-btn>
+                >Удалить</v-btn
+              >
             </v-col>
           </v-row>
         </div>
@@ -210,6 +244,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Product",
+  },
   data() {
     return {
       id: this.$route.params["id"],
