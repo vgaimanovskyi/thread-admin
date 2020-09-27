@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/thread-admin/precache-manifest.19256b0f9f968663709c4f9ef0f3a907.js"
+  "/thread-admin/precache-manifest.ece0edc376040684810e4c2f6e66db81.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "vlad-admin"});
+workbox.core.setCacheNameDetails({prefix: "thread-admin"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
