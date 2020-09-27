@@ -48,7 +48,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/thread-admin/css/chunk-vendors.b1bb3023.css"
   },
   {
-    "revision": "3289217ab33bc61ce00d3c1388d7b790",
+    "revision": "ca13a7136ec963d5daf1620d48338215",
     "url": "/thread-admin/index.html"
   },
   {
@@ -112,7 +112,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/thread-admin/js/chunk-vendors.ad224b67.js"
   },
   {
-    "revision": "b860a7908fc1f99aad8de147e093f1b0",
+    "revision": "3ac7cd5123333208cffc3fa90520d151",
     "url": "/thread-admin/manifest.json"
   },
   {
